@@ -81,8 +81,7 @@ class PolicyAgent:
 
         conv1 = tf.layers.conv2d(x, 32, 8, 4, activation = tf.nn.relu)
         conv2 = tf.layers.conv2d(conv1, 64, 4, 2, activation = tf.nn.relu)
-        conv3 = tf.layers.conv2d(conv2, 64, 3, 1, activ
-        ation = tf.nn.relu)
+        conv3 = tf.layers.conv2d(conv2, 64, 3, 1, activation = tf.nn.relu)
 
         flatten = tf.layers.flatten(conv3)
         fc1 = tf.layers.dense(flatten, 512, activation = tf.nn.relu)
@@ -116,8 +115,7 @@ class PolicyAgent:
         state, action, advantage, reward = self.buffer.get_buffer()
 
         _, entropy,  loss = self.sess.run([self.train, self.entropy, self.loss], {self.st : state, self.act : action, self.adv : advantage})
-        reward_mean = np.mean(reward)
-        print(reward)
+        print(entropy, loss)
 
     def store(self, state, action, reward):
         self.buffer.store(state, action, reward)
